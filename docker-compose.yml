@@ -1,0 +1,16 @@
+services:
+  pci-ltd:
+    image: pci-ltd:latest
+    container_name: pci-ltd
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - STATS_SECRET=${STATS_SECRET}
+    volumes:
+      - pci-stats:/data
+
+volumes:
+  pci-stats:
+    driver: local
