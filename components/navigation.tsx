@@ -3,6 +3,7 @@
 import { forwardRef, useState } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
+import { hasNewPrivacyWatchItem } from "@/lib/privacy-watch"
 
 export const Navigation = forwardRef<HTMLElement>(function Navigation(_, ref) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -44,6 +45,26 @@ export const Navigation = forwardRef<HTMLElement>(function Navigation(_, ref) {
             className="text-sm text-[#9dc4b8] hover:text-[#e8f4f0] transition-colors relative group"
           >
             Products
+            <span className="absolute -bottom-1 left-0 right-0 h-px bg-[#10b981] scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/privacy-watch"
+            className="text-sm text-[#f8e7bf] hover:text-white transition-colors relative group inline-flex items-center gap-2"
+            style={hasNewPrivacyWatchItem ? { textShadow: "0 0 12px rgba(245,158,11,0.45)" } : undefined}
+          >
+            <span className={hasNewPrivacyWatchItem ? "w-2 h-2 rounded-full bg-[#f59e0b] animate-pulse" : "w-2 h-2 rounded-full bg-[#f59e0b]"} />
+            Privacy Watch
+            <span className="absolute -bottom-1 left-0 right-0 h-px bg-[#f59e0b] scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/online-safety"
+            className="text-sm text-[#9dc4b8] hover:text-[#e8f4f0] transition-colors relative group"
+          >
+            Online Safety
             <span className="absolute -bottom-1 left-0 right-0 h-px bg-[#10b981] scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
           </Link>
         </li>
@@ -95,6 +116,24 @@ export const Navigation = forwardRef<HTMLElement>(function Navigation(_, ref) {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Products
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/privacy-watch"
+                className="text-[#f8e7bf] hover:text-white transition-colors block py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Privacy Watch{hasNewPrivacyWatchItem ? " (new)" : ""}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/online-safety"
+                className="text-[#9dc4b8] hover:text-[#e8f4f0] transition-colors block py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Online Safety
               </Link>
             </li>
             <li>

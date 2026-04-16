@@ -28,6 +28,22 @@ export function Hero() {
             since 1991. From secure encrypted communications to native mobile
             apps and payment systems — genuine expertise, long-term relationships.
           </p>
+          <a
+            href="/speakez"
+            className="opacity-0 mb-6 block rounded-xl px-4 py-3 border border-[rgba(16,185,129,0.35)] hover:border-[#10b981] transition-all hover:-translate-y-0.5"
+            style={{
+              animation: "fadeUp 0.7s 0.42s ease forwards",
+              background: "linear-gradient(120deg, rgba(16,185,129,0.16) 0%, rgba(14,165,233,0.14) 100%)",
+              boxShadow: "0 8px 28px rgba(16,185,129,0.15)",
+            }}
+          >
+            <p className="text-[10px] font-medium tracking-widest uppercase text-[#6ee7b7] mb-1">
+              Product announcement
+            </p>
+            <p className="text-sm md:text-base text-[#e8f4f0] font-medium">
+              Speak Ez imminent release now announced. Tap to view launch details.
+            </p>
+          </a>
           <div
             className="flex gap-3 flex-wrap opacity-0"
             style={{ animation: "fadeUp 0.7s 0.5s ease forwards" }}

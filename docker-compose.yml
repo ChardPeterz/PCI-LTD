@@ -1,5 +1,8 @@
 services:
   pci-ltd:
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: pci-ltd:latest
     container_name: pci-ltd
     restart: unless-stopped

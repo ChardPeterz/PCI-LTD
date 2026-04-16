@@ -7,9 +7,9 @@ export function Footer() {
       style={{ background: "rgba(5,10,9,0.95)" }}
     >
       <div className="flex items-center gap-4">
-        <span className="font-serif text-base text-[#e8f4f0]">PCI</span>
+        <span className="font-serif text-base text-[#e8f4f0]">Professional Computer Integrators Limited</span>
         <span className="text-sm text-[#6b9b8a]">
-          &copy; 2026 PCI Ltd. All rights reserved. Registered in England &amp; Wales.
+          &copy; 2026 Professional Computer Integrators Limited. All rights reserved. Registered in England &amp; Wales.
         </span>
       </div>
       <div className="flex gap-5">
