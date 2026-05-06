@@ -1,6 +1,6 @@
 const reasons = [
   {
-    num: "25+",
+    num: "35+",
     label: "Years in business",
     desc: "Founded in 1991 — we've seen every technology shift and we're still here.",
   },

@@ -15,9 +15,9 @@ const accreditations = [
   },
   {
     icon: GraduationCap,
-    title: "MCSE & CNE Qualified Engineers",
+    title: "Industry Qualified Engineers",
     description:
-      "Microsoft Certified and Novell Certified engineers on the team.",
+      "Microsoft Certified and Vendor approved engineers on the team.",
   },
 ]
 
@@ -50,9 +50,9 @@ export function AboutSection() {
             and custom-software workplaces.
           </p>
           <p className="text-[15px] text-[#9dc4b8] leading-relaxed">
-            Our team includes engineers with MCSE and CNE qualifications,
+            Our team is backed by 100+ years of combined experience,
             experienced in the full range of Microsoft and network environments.
-            We also develop bespoke applications — from secure encrypted
+            We focus strongly on develop bespoke applications — from secure encrypted
             communication platforms and native mobile apps to integrated payment
             systems and decentralised storage architectures, built to your exact
             specification.
