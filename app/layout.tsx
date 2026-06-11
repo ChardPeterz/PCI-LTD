@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { CookieBanner } from '@/components/cookie-banner'
 import { SessionTracker } from '@/components/session-tracker'
 import { BrowserGuard } from '@/components/browser-guard'
+import { AdminFab } from '@/components/admin-fab'
 import './globals.css'
 
 const fraunces = Fraunces({ 
@@ -53,6 +54,7 @@ export default function RootLayout({
         <BrowserGuard />
         <SessionTracker />
         <CookieBanner />
+        <AdminFab />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

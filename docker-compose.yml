@@ -10,7 +10,7 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-      - STATS_SECRET=${STATS_SECRET}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
     volumes:
       - pci-stats:/data
 
