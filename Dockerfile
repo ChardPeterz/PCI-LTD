@@ -3,8 +3,8 @@ FROM node:20-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Install pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
+# Install pnpm (pinned to a Node 20-compatible version; pnpm 11+ requires Node >= 22.13)
+RUN corepack enable && corepack prepare pnpm@10.33.2 --activate
 
 # Copy lockfile and manifests, then install
 COPY package.json pnpm-lock.yaml ./
@@ -14,7 +14,7 @@ RUN pnpm install --frozen-lockfile
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN corepack enable && corepack prepare pnpm@10.33.2 --activate
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .

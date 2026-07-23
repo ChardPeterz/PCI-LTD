@@ -10,6 +10,10 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
+<<<<<<< HEAD
+=======
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+>>>>>>> 57c2826ab3c5883f938f3a6cdebfadc7f31f5cbc
     volumes:
       - pci-stats:/data
 
