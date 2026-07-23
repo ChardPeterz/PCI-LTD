@@ -150,19 +150,49 @@ export function SpeakEzSection() {
         <div>
           <p className="text-[10px] font-semibold tracking-widest uppercase text-[#6ee7b7] mb-1">Announcement</p>
           <p className="text-base md:text-lg text-[#e8f4f0] font-light leading-snug max-w-2xl">
-            <strong className="font-semibold">Speak Ez is launching imminently.</strong> Secure communication without technical friction,
+            <strong className="font-semibold">SpeakEz is now live.</strong> Get the app on Apple App Store and Google Play Store. Secure communication without technical friction,
             and a clear answer to one question: how much is YOUR privacy worth?
           </p>
         </div>
-        <div className="flex flex-wrap gap-3">
-          <Link
-            href="/privacy-watch"
-            className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm text-[#f8e7bf] border border-[rgba(245,158,11,0.35)] bg-[rgba(245,158,11,0.12)] hover:bg-[rgba(245,158,11,0.18)] transition-colors"
-            style={hasNewPrivacyWatchItem ? { boxShadow: "0 0 22px rgba(245,158,11,0.28)" } : undefined}
+        <div className="flex flex-nowrap gap-3 items-center">
+          <a
+            href="https://play.google.com/store/apps/details?id=com.spkezz.app&pli=1"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Get SpeakEz on Google Play"
+            className="inline-flex items-center gap-3 bg-[#10b981] hover:bg-[#059669] text-[#031a12] font-semibold text-sm px-5 py-3.5 rounded-full transition-colors whitespace-nowrap shrink-0"
           >
-            <span className={hasNewPrivacyWatchItem ? "w-2 h-2 rounded-full bg-[#f59e0b] animate-pulse" : "w-2 h-2 rounded-full bg-[#f59e0b]"} />
-            Privacy Watch
-          </Link>
+            <span className="w-6 h-6 rounded-md bg-[rgba(255,255,255,0.9)] flex items-center justify-center shadow-[0_0_0_1px_rgba(0,0,0,0.08)]" aria-hidden="true">
+              <img
+                src="https://cdn.simpleicons.org/googleplay"
+                alt="Google Play"
+                className="w-4.5 h-4.5"
+                loading="lazy"
+                decoding="async"
+              />
+            </span>
+            <span>Get it on Google Play</span>
+          </a>
+          <a
+            href="https://apps.apple.com/gb/app/spkez/id6763252365"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Download SpeakEz on the App Store"
+            className="inline-flex items-center gap-3 bg-[#0ea5e9] hover:bg-[#0284c7] text-white font-semibold text-sm px-5 py-3.5 rounded-full transition-colors whitespace-nowrap shrink-0"
+          >
+            <span className="w-6 h-6 rounded-md bg-[rgba(255,255,255,0.18)] flex items-center justify-center" aria-hidden="true">
+              <img
+                src="https://cdn.simpleicons.org/appstore/ffffff"
+                alt="Apple App Store"
+                className="w-4.5 h-4.5"
+                loading="lazy"
+                decoding="async"
+              />
+            </span>
+            <span>Download on the App Store</span>
+          </a>
+        
+          
         </div>
       </div>
 

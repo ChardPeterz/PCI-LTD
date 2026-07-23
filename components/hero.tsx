@@ -15,7 +15,7 @@ export function Hero() {
           Product announcement
         </span>
         <span className="text-sm text-[#e8f4f0] font-medium">
-          Speak Ez imminent release now announced — tap to view launch details →
+          SpeakEz Out Now ! — Get it now on Google PlayStore & Apple App Store →
         </span>
       </a>
       <a
