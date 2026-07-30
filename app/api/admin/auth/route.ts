@@ -23,6 +23,31 @@ function clientIp(request: Request): string {
   return firstForwarded ?? "unknown";
 }
 
+function isAllowedOrigin(request: Request): boolean {
+  const origin = request.headers.get("origin");
+  if (!origin) return true;
+
+  let originHost = "";
+  try {
+    originHost = new URL(origin).hostname.toLowerCase();
+  } catch {
+    return false;
+  }
+
+  const hostHeader = request.headers.get("host");
+  const forwardedHost = request.headers.get("x-forwarded-host");
+
+  const candidates = [hostHeader, forwardedHost]
+    .filter((value): value is string => Boolean(value))
+    .flatMap((value) => value.split(","))
+    .map((value) => value.trim().toLowerCase())
+    .filter(Boolean)
+    .map((value) => value.split(":")[0]);
+
+  if (candidates.length === 0) return true;
+  return candidates.includes(originHost);
+}
+
 export async function POST(request: Request) {
   const ip = clientIp(request);
 
@@ -40,9 +65,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const origin = request.headers.get("origin");
-  const host = request.headers.get("host");
-  if (origin && host && !origin.includes(host)) {
+  if (!isAllowedOrigin(request)) {
     return NextResponse.json({ ok: false, error: "Invalid origin." }, { status: 403 });
   }
 

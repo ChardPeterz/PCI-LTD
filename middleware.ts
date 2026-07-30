@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server"
 import {
   ADMIN_AUTH_COOKIE,
   getAdminAuthCookieValue,
-  isAdminAuthConfigured,
 } from "@/lib/admin/auth"
 
 const BLOCKED_AGENTS = [
@@ -84,13 +83,6 @@ export async function middleware(req: NextRequest) {
 
   if (pathname === authApiPath && req.method === "POST" && isAuthRateLimited(ip)) {
     return NextResponse.json({ error: "Too many attempts" }, { status: 429 })
-  }
-
-  if ((isAdminPage || isAdminApi) && !isAdminAuthConfigured()) {
-    return NextResponse.json(
-      { error: "Admin security is not configured. Set ADMIN_PASSWORD to enable the admin area." },
-      { status: 503 }
-    )
   }
 
   if (isAdminPage || isAdminApi) {

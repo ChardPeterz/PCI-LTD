@@ -1,5 +1,15 @@
 [
   {
+    "title": "Mexican government delays biometric registration deadline after massive public resistance",
+    "published": "2026-06-25",
+    "category": "Mexico / Biometric ID / Telecom policy",
+    "source": "The Last American Vagabond (Derrick Broze)",
+    "summary": "Mexico's President Claudia Sheinbaum announced an extension to a controversial requirement linking mobile phone lines to personal identity records after less than half the population had registered. The Telecommunications Regulatory Commission introduced a staggered August-to-December deadline based on phone-number endings, with non-compliant lines facing suspension within 72 hours after expiry.",
+    "whyItMatters": "Public resistance to mandatory biometric and identity-linked telecom registration highlights growing concern over centralised personal data systems, surveillance risk, and potential service exclusion for people who do not comply.",
+    "href": "https://www.thelastamericanvagabond.com/biometric-curp-extension/",
+    "isNew": true
+  },
+  {
     "title": "ICO fines software company £4.4 million for unlawful use of personal data in AI training",
     "published": "2026-03-31",
     "category": "ICO fine",

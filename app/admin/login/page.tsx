@@ -41,10 +41,20 @@ function AdminLoginForm() {
       });
 
       if (!response.ok) {
+        let message = "Incorrect password.";
+        try {
+          const data = (await response.json()) as { error?: string };
+          if (typeof data.error === "string" && data.error.trim()) {
+            message = data.error;
+          }
+        } catch {
+          // Fall back to default message when response is not JSON.
+        }
+
         if (response.status === 429) {
           setError("Too many attempts. Try again later.");
         } else {
-          setError("Incorrect password.");
+          setError(message);
         }
         return;
       }

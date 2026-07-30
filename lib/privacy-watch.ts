@@ -7,6 +7,8 @@ export type PrivacyWatchItem = {
   whyItMatters: string
   href: string
   isNew?: boolean
+  isLive?: boolean
+  relevance?: 'messaging' | 'general'
 }
 
 // Legacy export - now always true since feed updates dynamically

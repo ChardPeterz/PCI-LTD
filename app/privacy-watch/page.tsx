@@ -16,6 +16,16 @@ export default function PrivacyWatchPage() {
   const latestItem = sortedItems[0]
   const remainingItems = sortedItems.slice(1)
 
+  function formatPublishedDate(value: string) {
+    const parsed = new Date(value)
+    if (Number.isNaN(parsed.getTime())) return value
+    return parsed.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    })
+  }
+
   useEffect(() => {
     async function fetchItems() {
       try {
@@ -40,10 +50,10 @@ export default function PrivacyWatchPage() {
       <main className="relative z-[1] py-16 md:py-24 px-6 md:px-12 max-w-[1100px] mx-auto">
         <p className="text-[11px] font-medium tracking-widest uppercase text-[#6b9b8a] mb-3">Privacy Watch</p>
         <h1 className="font-serif text-3xl md:text-4xl font-light tracking-tight text-[#e8f4f0] mb-4 text-balance">
-          Current privacy breaches, user exposure and message-evidence cases
+          Live privacy and security watchlist for private messaging
         </h1>
         <p className="text-base text-[#9dc4b8] leading-relaxed max-w-3xl mb-10">
-          Latest privacy news from regulators, courts, platform policy changes and security research, ordered by most recent update.
+          Curated and live updates from regulators, courts, platform policy changes and security research, prioritised for private messaging subjects.
         </p>
 
         {loading && <p className="text-[#7aa898] py-8">Loading privacy watch items...</p>}
@@ -53,7 +63,7 @@ export default function PrivacyWatchPage() {
           <section className="mb-8">
             <p className="text-[11px] font-medium tracking-widest uppercase text-[#f8e7bf] mb-3">Latest privacy news</p>
             <article
-              className="rounded-2xl p-7 md:p-8"
+              className="w-full min-w-0 max-w-full overflow-hidden rounded-2xl p-7 md:p-8"
               style={{
                 background: "linear-gradient(135deg, rgba(245,158,11,0.14) 0%, rgba(16,185,129,0.13) 100%)",
                 border: "1px solid rgba(245,158,11,0.36)",
@@ -62,13 +72,14 @@ export default function PrivacyWatchPage() {
             >
               <div className="flex items-center gap-3 flex-wrap mb-3">
                 <span className="text-[11px] tracking-widest uppercase text-[#f8e7bf]">{latestItem.category}</span>
-                <span className="text-xs text-[#9dc4b8]">{latestItem.published}</span>
+                <span className="text-xs text-[#9dc4b8]">{formatPublishedDate(latestItem.published)}</span>
                 <span className="text-xs text-[#9dc4b8]">{latestItem.source}</span>
                 <span className="text-[10px] uppercase tracking-widest text-[#f59e0b]">Latest</span>
+                {latestItem.isLive ? <span className="text-[10px] uppercase tracking-widest text-[#6ee7b7]">Live feed</span> : null}
               </div>
-              <h2 className="font-serif text-2xl md:text-3xl text-[#e8f4f0] font-light mb-3 text-balance">{latestItem.title}</h2>
-              <p className="text-base text-[#9dc4b8] leading-relaxed mb-3">{latestItem.summary}</p>
-              <p className="text-sm text-[#b6f5d9] leading-relaxed mb-5">Why it matters: {latestItem.whyItMatters}</p>
+              <h2 className="font-serif text-2xl md:text-3xl text-[#e8f4f0] font-light mb-3 text-balance break-all">{latestItem.title}</h2>
+              <p className="text-base text-[#9dc4b8] leading-relaxed mb-3 break-all">{latestItem.summary}</p>
+              <p className="text-sm text-[#b6f5d9] leading-relaxed mb-5 break-all">Why it matters: {latestItem.whyItMatters}</p>
               <a
                 href={latestItem.href}
                 target="_blank"
@@ -85,7 +96,7 @@ export default function PrivacyWatchPage() {
           {remainingItems.map((item) => (
             <article
               key={`${item.published}-${item.title}`}
-              className="rounded-2xl p-6"
+              className="w-full min-w-0 max-w-full overflow-hidden rounded-2xl p-6"
               style={{
                 background: "rgba(10,20,18,0.92)",
                 border: item.isNew ? "1px solid rgba(245,158,11,0.35)" : "1px solid rgba(16,185,129,0.18)",
@@ -94,13 +105,14 @@ export default function PrivacyWatchPage() {
             >
               <div className="flex items-center gap-3 flex-wrap mb-3">
                 <span className="text-[11px] tracking-widest uppercase text-[#6ee7b7]">{item.category}</span>
-                <span className="text-xs text-[#7aa898]">{item.published}</span>
+                <span className="text-xs text-[#7aa898]">{formatPublishedDate(item.published)}</span>
                 <span className="text-xs text-[#7aa898]">{item.source}</span>
                 {item.isNew ? <span className="text-[10px] uppercase tracking-widest text-[#f59e0b]">New</span> : null}
+                {item.isLive ? <span className="text-[10px] uppercase tracking-widest text-[#6ee7b7]">Live feed</span> : null}
               </div>
-              <h2 className="text-xl text-[#e8f4f0] font-light mb-3">{item.title}</h2>
-              <p className="text-sm text-[#9dc4b8] leading-relaxed mb-3">{item.summary}</p>
-              <p className="text-sm text-[#b6f5d9] leading-relaxed mb-4">Why it matters: {item.whyItMatters}</p>
+              <h2 className="text-xl text-[#e8f4f0] font-light mb-3 break-all">{item.title}</h2>
+              <p className="text-sm text-[#9dc4b8] leading-relaxed mb-3 break-all">{item.summary}</p>
+              <p className="text-sm text-[#b6f5d9] leading-relaxed mb-4 break-all">Why it matters: {item.whyItMatters}</p>
               <a
                 href={item.href}
                 target="_blank"
