@@ -1,0 +1,18 @@
+services:
+  pci-ltd:
+    image: pci-ltd:latest
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      DATA_DIR: /data
+      ADMIN_PASSWORD: "Sativa2026!"
+      STATS_SECRET: 96f7bc4b265ca588bfea4fe93fecdae636c24615359ca0e0b2b92f81b7852865
+    volumes:
+      - pci-stats:/data
+
+volumes:
+  pci-stats:
+    name: pci-stats
+    driver: local

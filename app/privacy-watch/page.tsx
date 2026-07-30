@@ -12,6 +12,10 @@ export default function PrivacyWatchPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
+  const sortedItems = [...items].sort((a, b) => new Date(b.published).getTime() - new Date(a.published).getTime())
+  const latestItem = sortedItems[0]
+  const remainingItems = sortedItems.slice(1)
+
   useEffect(() => {
     async function fetchItems() {
       try {
@@ -38,12 +42,47 @@ export default function PrivacyWatchPage() {
         <h1 className="font-serif text-3xl md:text-4xl font-light tracking-tight text-[#e8f4f0] mb-4 text-balance">
           Current privacy breaches, user exposure and message-evidence cases
         </h1>
+        <p className="text-base text-[#9dc4b8] leading-relaxed max-w-3xl mb-10">
+          Latest privacy news from regulators, courts, platform policy changes and security research, ordered by most recent update.
+        </p>
 
         {loading && <p className="text-[#7aa898] py-8">Loading privacy watch items...</p>}
         {error && <p className="text-[#f87171] py-8">{error}</p>}
 
+        {latestItem ? (
+          <section className="mb-8">
+            <p className="text-[11px] font-medium tracking-widest uppercase text-[#f8e7bf] mb-3">Latest privacy news</p>
+            <article
+              className="rounded-2xl p-7 md:p-8"
+              style={{
+                background: "linear-gradient(135deg, rgba(245,158,11,0.14) 0%, rgba(16,185,129,0.13) 100%)",
+                border: "1px solid rgba(245,158,11,0.36)",
+                boxShadow: "0 10px 36px rgba(245,158,11,0.12)",
+              }}
+            >
+              <div className="flex items-center gap-3 flex-wrap mb-3">
+                <span className="text-[11px] tracking-widest uppercase text-[#f8e7bf]">{latestItem.category}</span>
+                <span className="text-xs text-[#9dc4b8]">{latestItem.published}</span>
+                <span className="text-xs text-[#9dc4b8]">{latestItem.source}</span>
+                <span className="text-[10px] uppercase tracking-widest text-[#f59e0b]">Latest</span>
+              </div>
+              <h2 className="font-serif text-2xl md:text-3xl text-[#e8f4f0] font-light mb-3 text-balance">{latestItem.title}</h2>
+              <p className="text-base text-[#9dc4b8] leading-relaxed mb-3">{latestItem.summary}</p>
+              <p className="text-sm text-[#b6f5d9] leading-relaxed mb-5">Why it matters: {latestItem.whyItMatters}</p>
+              <a
+                href={latestItem.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-[#f59e0b] hover:bg-[#d97706] text-[#031a12] px-5 py-3 rounded-full text-sm font-medium transition-colors"
+              >
+                Read the latest article
+              </a>
+            </article>
+          </section>
+        ) : null}
+
         <div className="grid gap-5 mb-12">
-          {items.map((item) => (
+          {remainingItems.map((item) => (
             <article
               key={`${item.published}-${item.title}`}
               className="rounded-2xl p-6"

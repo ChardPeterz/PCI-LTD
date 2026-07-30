@@ -2,6 +2,39 @@
 export function Hero() {
   return (
     <div className="relative z-[1]">
+       {/* Full-width announcement banners */}
+      <a
+        href="/speakez"
+        className="block w-full px-6 py-3 text-center hover:opacity-90 transition-opacity"
+        style={{
+          background: "linear-gradient(120deg, rgba(16,185,129,0.18) 0%, rgba(14,165,233,0.15) 100%)",
+          borderBottom: "1px solid rgba(16,185,129,0.3)",
+        }}
+      >
+        <span className="text-[10px] font-medium tracking-widest uppercase text-[#6ee7b7] mr-2">
+          Product announcement
+        </span>
+        <span className="text-sm text-[#e8f4f0] font-medium">
+          SpeakEz Out Now ! — Get it now on Google PlayStore & Apple App Store →
+        </span>
+      </a>
+      <a
+        href="http://savethechase.duckdns.org"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block w-full px-6 py-3 text-center hover:opacity-90 transition-opacity"
+        style={{
+          background: "linear-gradient(120deg, rgba(14,165,233,0.18) 0%, rgba(124,58,237,0.13) 100%)",
+          borderBottom: "1px solid rgba(14,165,233,0.3)",
+        }}
+      >
+        <span className="text-[10px] font-medium tracking-widest uppercase text-[#7dd3fc] mr-2">
+          Community announcement
+        </span>
+        <span className="text-sm text-[#e8f4f0] font-medium">
+          Save The Chase — find out more at savethechase.duckdns.org →
+        </span>
+      </a>
       <div className="py-16 md:py-24 px-6 md:px-12 max-w-[1100px] mx-auto grid md:grid-cols-2 gap-10 md:gap-20 items-center">
         {/* Left Content */}
         <div>
@@ -28,22 +61,7 @@ export function Hero() {
             since 1991. From secure encrypted communications to native mobile
             apps and payment systems — genuine expertise, long-term relationships.
           </p>
-          <a
-            href="/speakez"
-            className="opacity-0 mb-6 block rounded-xl px-4 py-3 border border-[rgba(16,185,129,0.35)] hover:border-[#10b981] transition-all hover:-translate-y-0.5"
-            style={{
-              animation: "fadeUp 0.7s 0.42s ease forwards",
-              background: "linear-gradient(120deg, rgba(16,185,129,0.16) 0%, rgba(14,165,233,0.14) 100%)",
-              boxShadow: "0 8px 28px rgba(16,185,129,0.15)",
-            }}
-          >
-            <p className="text-[10px] font-medium tracking-widest uppercase text-[#6ee7b7] mb-1">
-              Product announcement
-            </p>
-            <p className="text-sm md:text-base text-[#e8f4f0] font-medium">
-              Speak Ez imminent release now announced. Tap to view launch details.
-            </p>
-          </a>
+          
           <div
             className="flex gap-3 flex-wrap opacity-0"
             style={{ animation: "fadeUp 0.7s 0.5s ease forwards" }}
@@ -99,7 +117,7 @@ export function Hero() {
             {/* Content */}
             <div className="relative z-10">
               <div className="font-serif text-7xl md:text-8xl font-light text-white/[0.09] leading-none tracking-tighter mb-0.5">
-                25
+                35+
               </div>
               <div className="text-sm text-white/70 mb-7">
                 years serving the South-West
