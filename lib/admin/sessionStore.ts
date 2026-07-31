@@ -44,6 +44,39 @@ export async function addSession(session: VisitorSession): Promise<void> {
   await writeDb(db);
 }
 
+function formatDuration(seconds: number): string {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${String(m).padStart(2, "0")}m ${String(s).padStart(2, "0")}s`;
+}
+
+// Upsert a visit keyed on its stable clientId so repeated heartbeats update the
+// running dwell time / page count instead of creating duplicate rows.
+export async function upsertSession(session: VisitorSession): Promise<void> {
+  const db = await readDb();
+  const clientId = session.clientId;
+  const idx = clientId
+    ? db.sessions.findIndex((s) => s.clientId && s.clientId === clientId)
+    : -1;
+
+  if (idx >= 0) {
+    const existing = db.sessions[idx];
+    const seconds = Math.max(existing.durationSeconds ?? 0, session.durationSeconds ?? 0);
+    db.sessions[idx] = {
+      ...existing,
+      duration: formatDuration(seconds),
+      durationSeconds: seconds,
+      pages: Math.max(existing.pages, session.pages),
+      journey: session.journey.length >= existing.journey.length ? session.journey : existing.journey,
+      timestamp: session.timestamp,
+      ip: session.ip && session.ip !== "local" ? session.ip : existing.ip,
+    };
+  } else {
+    db.sessions.unshift(session);
+  }
+  await writeDb(db);
+}
+
 export async function clearAllSessions(): Promise<{ clearedCount: number }> {
   const db = await readDb();
   const clearedCount = db.sessions.length;

@@ -20,4 +20,8 @@ export type VisitorSession = {
   journey: JourneyStep[];
   /** Visitor IP address (or "local" for private/unresolved). */
   ip?: string;
+  /** Stable per-browser session id used to upsert running visit stats. */
+  clientId?: string;
+  /** Cumulative dwell time in seconds; drives accurate duration updates. */
+  durationSeconds?: number;
 };

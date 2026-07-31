@@ -32,7 +32,7 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
-ENV STATS_SECRET="Sativa2026!"
+ENV ADMIN_PASSWORD="Sativa2026!"
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs

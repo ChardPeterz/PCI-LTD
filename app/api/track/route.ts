@@ -1,24 +1,39 @@
 import { NextResponse } from "next/server";
-import { addSession } from "@/lib/admin/sessionStore";
-import { lookupIpLocation } from "@/lib/admin/ipLocation";
+import { upsertSession } from "@/lib/admin/sessionStore";
+import { isPrivateIp, lookupIpLocation } from "@/lib/admin/ipLocation";
 import { parseSource, parseUserAgent } from "@/lib/admin/userAgent";
 import type { JourneyStep, VisitorSession } from "@/lib/admin/types";
 
 export const runtime = "nodejs";
 
 type TrackPayload = {
+  sessionId?: string;
   journey?: JourneyStep[];
   duration?: number;
   pages?: number;
 };
 
+// Pick the most trustworthy client IP available. Order matters: single-value
+// proxy headers set by Cloudflare / a trusted reverse proxy are preferred over
+// the multi-hop X-Forwarded-For chain, from which we take the first public IP.
 function clientIp(request: Request): string {
-  const forwarded = request.headers.get("x-forwarded-for");
-  return (
-    forwarded?.split(",")[0]?.trim() ??
-    request.headers.get("x-real-ip") ??
-    "unknown"
-  );
+  const h = request.headers;
+
+  const direct =
+    h.get("cf-connecting-ip") ||
+    h.get("true-client-ip") ||
+    h.get("x-real-ip");
+  if (direct && direct.trim()) return direct.trim();
+
+  const forwarded = h.get("x-forwarded-for");
+  if (forwarded) {
+    const chain = forwarded.split(",").map((part) => part.trim()).filter(Boolean);
+    const publicIp = chain.find((ip) => !isPrivateIp(ip));
+    if (publicIp) return publicIp;
+    if (chain[0]) return chain[0];
+  }
+
+  return "unknown";
 }
 
 function formatDuration(seconds: number): string {
@@ -32,27 +47,9 @@ function generateId(countryCode: string): string {
   return `S-${(countryCode || "XX").toUpperCase()}-${num}`;
 }
 
-// In-memory dedup: one session recorded per IP per 10 minutes
-const DEDUP_STORE = globalThis as typeof globalThis & {
-  __trackDedup?: Map<string, number>;
-};
-const dedup = DEDUP_STORE.__trackDedup ?? new Map<string, number>();
-DEDUP_STORE.__trackDedup = dedup;
-
-function isDuplicate(ip: string): boolean {
-  const now = Date.now();
-  const last = dedup.get(ip);
-  if (last && now - last < 10 * 60 * 1000) return true;
-  dedup.set(ip, now);
-  return false;
-}
-
 export async function POST(request: Request) {
   const ip = clientIp(request);
-
-  if (isDuplicate(ip)) {
-    return NextResponse.json({ ok: true });
-  }
+  const ua = request.headers.get("user-agent") ?? "";
 
   let body: TrackPayload;
   try {
@@ -65,8 +62,13 @@ export async function POST(request: Request) {
   const duration = typeof body.duration === "number" ? body.duration : 0;
   const pages = typeof body.pages === "number" ? body.pages : Math.max(1, journey.length);
 
+  // Stable per-browser id used to upsert this visit. Falls back to IP+UA so
+  // visits without a client id still coalesce instead of duplicating.
+  const clientId =
+    String(body.sessionId ?? "").trim().slice(0, 64) || `ipua:${ip}|${ua}`.slice(0, 128);
+
   // Ignore very short visits (likely bots or accidental loads)
-  if (duration < 5) {
+  if (duration < 3) {
     return NextResponse.json({ ok: true });
   }
 
@@ -75,7 +77,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   }
 
-  const ua = request.headers.get("user-agent") ?? "";
   const referer = request.headers.get("referer");
   const host = request.headers.get("host") ?? "";
 
@@ -98,14 +99,16 @@ export async function POST(request: Request) {
     browser,
     device: device === "Unknown" ? "Desktop" : device,
     duration: formatDuration(Math.round(duration)),
+    durationSeconds: Math.round(duration),
     timestamp: new Date().toISOString(),
     pages: Math.max(1, pages),
     coordinates: geo.coordinates,
     journey,
     ip: geo.isPrivate ? "local" : geo.ip,
+    clientId,
   };
 
-  await addSession(session);
+  await upsertSession(session);
   return NextResponse.json({ ok: true });
 }
 

@@ -179,9 +179,9 @@ export function SessionTracker() {
     // Initial page-view beacon
     send(true);
 
-    // Heartbeat every 30s while the tab is visible so dwell time is recorded
+    // Heartbeat every 10s while the tab is visible so dwell time is recorded
     // even when the visitor stays on a single page.
-    const HEARTBEAT_MS = 30_000;
+    const HEARTBEAT_MS = 10_000;
     let heartbeatId: ReturnType<typeof setInterval> | null = null;
 
     function startHeartbeat() {
