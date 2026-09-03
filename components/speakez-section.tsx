@@ -140,29 +140,29 @@ export function SpeakEzSection() {
   return (
     <section id="speakez" className="relative z-[1] py-16 md:py-24 px-6 md:px-12 max-w-[1100px] mx-auto">
       <div
-        className="reveal mb-10 rounded-2xl px-6 py-5 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4"
+        className="reveal mb-10 rounded-2xl px-4 sm:px-6 py-5 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 overflow-hidden"
         style={{
           background: "linear-gradient(120deg, rgba(16,185,129,0.22) 0%, rgba(14,165,233,0.18) 100%)",
           border: "1px solid rgba(16,185,129,0.45)",
           boxShadow: "0 8px 36px rgba(16,185,129,0.2)",
         }}
       >
-        <div>
+        <div className="min-w-0">
           <p className="text-[10px] font-semibold tracking-widest uppercase text-[#6ee7b7] mb-1">Announcement</p>
           <p className="text-base md:text-lg text-[#e8f4f0] font-light leading-snug max-w-2xl">
             <strong className="font-semibold">SpeakEz is now live.</strong> Get the app on Apple App Store and Google Play Store. Secure communication without technical friction,
             and a clear answer to one question: how much is YOUR privacy worth?
           </p>
         </div>
-        <div className="flex flex-nowrap gap-3 items-center">
+        <div className="flex flex-col sm:flex-row flex-wrap gap-3 items-stretch sm:items-center w-full lg:w-auto lg:shrink-0">
           <a
             href="https://play.google.com/store/apps/details?id=com.spkezz.app&pli=1"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Get SpeakEz on Google Play"
-            className="inline-flex items-center gap-3 bg-[#10b981] hover:bg-[#059669] text-[#031a12] font-semibold text-sm px-5 py-3.5 rounded-full transition-colors whitespace-nowrap shrink-0"
+            className="inline-flex items-center justify-center gap-2.5 bg-[#10b981] hover:bg-[#059669] text-[#031a12] font-semibold text-[13px] sm:text-sm px-4 sm:px-5 py-3 sm:py-3.5 rounded-full transition-colors w-full sm:w-auto min-w-0"
           >
-            <span className="w-6 h-6 rounded-md bg-[rgba(255,255,255,0.9)] flex items-center justify-center shadow-[0_0_0_1px_rgba(0,0,0,0.08)]" aria-hidden="true">
+            <span className="w-6 h-6 shrink-0 rounded-md bg-[rgba(255,255,255,0.9)] flex items-center justify-center shadow-[0_0_0_1px_rgba(0,0,0,0.08)]" aria-hidden="true">
               <img
                 src="https://cdn.simpleicons.org/googleplay"
                 alt="Google Play"
@@ -171,16 +171,16 @@ export function SpeakEzSection() {
                 decoding="async"
               />
             </span>
-            <span>Get it on Google Play</span>
+            <span className="truncate">Get it on Google Play</span>
           </a>
           <a
             href="https://apps.apple.com/gb/app/spkez/id6763252365"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Download SpeakEz on the App Store"
-            className="inline-flex items-center gap-3 bg-[#0ea5e9] hover:bg-[#0284c7] text-white font-semibold text-sm px-5 py-3.5 rounded-full transition-colors whitespace-nowrap shrink-0"
+            className="inline-flex items-center justify-center gap-2.5 bg-[#0ea5e9] hover:bg-[#0284c7] text-white font-semibold text-[13px] sm:text-sm px-4 sm:px-5 py-3 sm:py-3.5 rounded-full transition-colors w-full sm:w-auto min-w-0"
           >
-            <span className="w-6 h-6 rounded-md bg-[rgba(255,255,255,0.18)] flex items-center justify-center" aria-hidden="true">
+            <span className="w-6 h-6 shrink-0 rounded-md bg-[rgba(255,255,255,0.18)] flex items-center justify-center" aria-hidden="true">
               <img
                 src="https://cdn.simpleicons.org/appstore/ffffff"
                 alt="Apple App Store"
@@ -189,10 +189,8 @@ export function SpeakEzSection() {
                 decoding="async"
               />
             </span>
-            <span>Download on the App Store</span>
+            <span className="truncate">Download on the App Store</span>
           </a>
-        
-          
         </div>
       </div>
 
