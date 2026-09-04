@@ -1,6 +1,7 @@
 import Link from "next/link"
 import {
   ArrowUpRight,
+  BarChart3,
   BookOpen,
   FileText,
   Globe,
@@ -139,7 +140,82 @@ const deepDiveLinks = [
 export function SpeakEzSection() {
   return (
     <section id="speakez" className="relative z-[1] py-16 md:py-24 px-6 md:px-12 max-w-[1100px] mx-auto">
+      {/* Products at a glance — DrinkTrax and SpeakEz side by side */}
+      <div className="reveal mb-10">
+        <div className="text-[11px] font-medium tracking-widest uppercase text-[#6b9b8a] mb-4">Our products</div>
+        <div className="grid md:grid-cols-2 gap-5">
+          {/* DrinkTrax */}
+          <a
+            href="https://www.drinktrax.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group rounded-2xl p-6 md:p-7 flex flex-col transition-all hover:-translate-y-1"
+            style={{
+              background: "linear-gradient(145deg, rgba(236,72,153,0.16) 0%, rgba(124,58,237,0.12) 100%)",
+              border: "1px solid rgba(236,72,153,0.3)",
+            }}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <div
+                className="w-11 h-11 rounded-xl flex items-center justify-center"
+                style={{ background: "rgba(236,72,153,0.14)", border: "1px solid rgba(236,72,153,0.3)" }}
+              >
+                <BarChart3 className="w-5 h-5 text-[#f9a8d4]" strokeWidth={1.5} />
+              </div>
+              <ArrowUpRight className="w-5 h-5 text-[#f9a8d4] group-hover:text-white transition-colors" />
+            </div>
+            <h3 className="font-serif text-2xl font-light text-[#e8f4f0] mb-2">DrinkTrax</h3>
+            <p className="text-sm text-[#9dc4b8] leading-relaxed mb-4 flex-1">
+              Smart bar profit tracking. Every pour counted, live stock and profit at a glance, and
+              instant alerts when the numbers don&apos;t add up. No spreadsheets, set up in minutes.
+            </p>
+            <ul className="flex flex-wrap gap-x-4 gap-y-1.5">
+              {["100% of pours accounted for", "0 spreadsheets", "24/7 live tracking"].map((point) => (
+                <li key={point} className="flex items-center gap-1.5 text-[11px] text-[#f8d7e8]">
+                  <span className="w-1 h-1 rounded-full bg-[#ec4899]" />
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </a>
+
+          {/* SpeakEz */}
+          <a
+            href="#speakez-overview"
+            className="group rounded-2xl p-6 md:p-7 flex flex-col transition-all hover:-translate-y-1"
+            style={{
+              background: "linear-gradient(145deg, rgba(16,185,129,0.16) 0%, rgba(14,165,233,0.12) 100%)",
+              border: "1px solid rgba(16,185,129,0.3)",
+            }}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <div
+                className="w-11 h-11 rounded-xl flex items-center justify-center"
+                style={{ background: "rgba(16,185,129,0.14)", border: "1px solid rgba(16,185,129,0.3)" }}
+              >
+                <MessageSquare className="w-5 h-5 text-[#6ee7b7]" strokeWidth={1.5} />
+              </div>
+              <ArrowUpRight className="w-5 h-5 text-[#6ee7b7] group-hover:text-white transition-colors" />
+            </div>
+            <h3 className="font-serif text-2xl font-light text-[#e8f4f0] mb-2">SpeakEz</h3>
+            <p className="text-sm text-[#9dc4b8] leading-relaxed mb-4 flex-1">
+              Privacy-first, end-to-end encrypted messaging, voice and media for people and teams who
+              need real privacy. No IT team, no setup ritual — open it and go.
+            </p>
+            <ul className="flex flex-wrap gap-x-4 gap-y-1.5">
+              {["Encrypted by default", "Android, iOS & browser", "Ready in minutes"].map((point) => (
+                <li key={point} className="flex items-center gap-1.5 text-[11px] text-[#b6f5d9]">
+                  <span className="w-1 h-1 rounded-full bg-[#10b981]" />
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </a>
+        </div>
+      </div>
+
       <div
+        id="speakez-overview"
         className="reveal mb-10 rounded-2xl px-4 sm:px-6 py-5 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 overflow-hidden"
         style={{
           background: "linear-gradient(120deg, rgba(16,185,129,0.22) 0%, rgba(14,165,233,0.18) 100%)",

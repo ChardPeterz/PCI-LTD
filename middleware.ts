@@ -5,14 +5,22 @@ import {
 } from "@/lib/admin/auth"
 
 const BLOCKED_AGENTS = [
-  "gptbot", "chatgpt-user", "ccbot", "anthropic-ai", "claude-web", "claudebot",
-  "cohere-ai", "google-extended", "perplexitybot", "youbot",
-  "bytespider", "petalbot", "amazonbot", "applebot-extended",
-  "diffbot", "facebookbot", "imagesiftbot", "omgili", "omgilibot",
-  "ia_archiver", "semrushbot", "ahrefsbot", "mj12bot", "dotbot",
-  "seznambot", "sogou", "exabot", "blexbot", "yandexbot",
-  "scrapy", "python-requests", "wget", "curl",
+  "gptbot", "chatgpt-user", "oai-searchbot", "ccbot", "anthropic-ai", "claude-web", "claudebot",
+  "cohere-ai", "google-extended", "perplexitybot", "youbot", "meta-externalagent", "meta-externalfetcher",
+  "bytespider", "petalbot", "amazonbot", "applebot-extended", "timpibot", "img2dataset",
+  "diffbot", "facebookbot", "imagesiftbot", "omgili", "omgilibot", "dataforseobot",
+  "ia_archiver", "semrushbot", "ahrefsbot", "mj12bot", "dotbot", "magpie-crawler",
+  "seznambot", "sogou", "exabot", "blexbot", "yandexbot", "serpstatbot",
+  // Generic automation / scraping tooling
+  "scrapy", "python-requests", "python-urllib", "aiohttp", "httpx", "wget", "curl",
+  "go-http-client", "libwww-perl", "java/", "okhttp", "node-fetch", "axios",
+  "headlesschrome", "phantomjs", "puppeteer", "playwright", "selenium",
 ]
+
+// Bots frequently omit or send a suspiciously short user-agent string.
+function isSuspiciousUserAgent(ua: string): boolean {
+  return ua.trim().length < 8
+}
 
 // Simple in-memory rate limiter: ip -> { count, windowStart }
 const rateLimitMap = new Map<string, { count: number; windowStart: number }>()
@@ -66,6 +74,13 @@ export async function middleware(req: NextRequest) {
 
   // Block bots and AI scrapers
   if (BLOCKED_AGENTS.some((bot) => ua.includes(bot))) {
+    return new NextResponse("Access denied.", { status: 403 })
+  }
+
+  // Block requests with a missing or suspiciously short user-agent (common for
+  // bots and scripts). Never apply this to the tracking beacon, which some
+  // privacy browsers send with a trimmed UA.
+  if (isSuspiciousUserAgent(ua) && pathname !== "/api/track") {
     return new NextResponse("Access denied.", { status: 403 })
   }
 

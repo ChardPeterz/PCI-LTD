@@ -60,7 +60,7 @@ function computeSourceStats(sessions: VisitorSession[]): SourceStat[] {
       source,
       visitors,
       share: Math.round((visitors / total) * 100),
-      trend: "â€”",
+      trend: "—",
     }));
 }
 
@@ -714,7 +714,7 @@ export default function AdminPage() {
                       <span className="font-medium text-[#e8f4f0]">{row.source}</span>
                       <span className="text-right text-[#9dc4b8]">{row.visitors.toLocaleString()}</span>
                       <span className="text-right text-[#9dc4b8]">{row.share}%</span>
-                      <span className={`text-right font-medium ${row.trend.startsWith("-") ? "text-[#f87171]" : "text-[#10b981]"}`}>
+                      <span className={`text-right font-medium ${row.trend === "—" ? "text-[#6b9b8a]" : row.trend.startsWith("-") ? "text-[#f87171]" : "text-[#10b981]"}`}>
                         {row.trend}
                       </span>
                     </div>

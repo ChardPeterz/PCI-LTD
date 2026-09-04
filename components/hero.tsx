@@ -2,93 +2,59 @@
 export function Hero() {
   return (
     <div className="relative z-[1]">
-       {/* Full-width announcement banners */}
+      {/* Full-width announcement banners — uniform and in line across the top */}
       <div
         className="w-full"
         style={{
-          background: "linear-gradient(120deg, rgba(236,72,153,0.14) 0%, rgba(16,185,129,0.16) 100%)",
+          background: "linear-gradient(120deg, rgba(236,72,153,0.14) 0%, rgba(16,185,129,0.15) 50%, rgba(14,165,233,0.16) 100%)",
           borderBottom: "1px solid rgba(16,185,129,0.3)",
         }}
       >
-        <div className="max-w-[1100px] mx-auto grid md:grid-cols-2 md:divide-x divide-y md:divide-y-0 divide-[rgba(255,255,255,0.12)]">
-          {/* DrinkTrax — left on desktop, top on mobile */}
+        <div className="max-w-[1100px] mx-auto grid md:grid-cols-3 md:divide-x divide-y md:divide-y-0 divide-[rgba(255,255,255,0.12)]">
+          {/* DrinkTrax */}
           <a
             href="https://www.drinktrax.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="group block px-5 sm:px-6 py-5 hover:bg-[rgba(236,72,153,0.08)] transition-colors"
+            className="group block px-6 py-3 text-center hover:bg-[rgba(236,72,153,0.08)] transition-colors"
           >
-            <p className="text-[10px] font-semibold tracking-widest uppercase text-[#f9a8d4] mb-1.5">
-              New product announcement
-            </p>
-            <p className="text-sm sm:text-base text-[#e8f4f0] font-medium leading-snug mb-2">
-              DrinkTrax — smart bar profit tracking, now live
-            </p>
-            <p className="text-[13px] text-[#9dc4b8] leading-relaxed mb-3">
-              Every pour counted, live stock and profit at a glance, and instant alerts when
-              the numbers don&apos;t add up. No spreadsheets, set up in minutes.
-            </p>
-            <ul className="flex flex-wrap gap-x-4 gap-y-1.5 mb-3">
-              {["100% of pours accounted for", "0 spreadsheets", "24/7 live profit tracking"].map((point) => (
-                <li key={point} className="flex items-center gap-1.5 text-[11px] text-[#f8d7e8]">
-                  <span className="w-1 h-1 rounded-full bg-[#ec4899]" />
-                  {point}
-                </li>
-              ))}
-            </ul>
-            <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#f9a8d4] group-hover:text-[#fbcfe8] transition-colors">
-              Find out more at www.DrinkTrax.com
-              <span aria-hidden="true">&#8594;</span>
+            <span className="text-[10px] font-medium tracking-widest uppercase text-[#f9a8d4] mr-2">
+              New product
+            </span>
+            <span className="text-sm text-[#e8f4f0] font-medium">
+              DrinkTrax — smart bar profit tracking &#8594;
             </span>
           </a>
 
-          {/* SpeakEz — right on desktop, bottom on mobile */}
+          {/* SpeakEz */}
           <a
             href="/speakez"
-            className="group block px-5 sm:px-6 py-5 hover:bg-[rgba(16,185,129,0.08)] transition-colors"
+            className="group block px-6 py-3 text-center hover:bg-[rgba(16,185,129,0.08)] transition-colors"
           >
-            <p className="text-[10px] font-semibold tracking-widest uppercase text-[#6ee7b7] mb-1.5">
-              Product announcement
-            </p>
-            <p className="text-sm sm:text-base text-[#e8f4f0] font-medium leading-snug mb-2">
-              SpeakEz is out now
-            </p>
-            <p className="text-[13px] text-[#9dc4b8] leading-relaxed mb-3">
-              End-to-end encrypted messaging, voice and media for people and teams who need
-              real privacy. No IT team, no setup ritual — open it and go.
-            </p>
-            <ul className="flex flex-wrap gap-x-4 gap-y-1.5 mb-3">
-              {["Encrypted by default", "Android, iOS & browser", "Ready in minutes"].map((point) => (
-                <li key={point} className="flex items-center gap-1.5 text-[11px] text-[#b6f5d9]">
-                  <span className="w-1 h-1 rounded-full bg-[#10b981]" />
-                  {point}
-                </li>
-              ))}
-            </ul>
-            <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#6ee7b7] group-hover:text-[#a7f3d0] transition-colors">
-              Get it on Google Play &amp; the Apple App Store
-              <span aria-hidden="true">&#8594;</span>
+            <span className="text-[10px] font-medium tracking-widest uppercase text-[#6ee7b7] mr-2">
+              Product
+            </span>
+            <span className="text-sm text-[#e8f4f0] font-medium">
+              SpeakEz — encrypted messaging, out now &#8594;
+            </span>
+          </a>
+
+          {/* Save The Chase */}
+          <a
+            href="http://savethechase.duckdns.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group block px-6 py-3 text-center hover:bg-[rgba(14,165,233,0.08)] transition-colors"
+          >
+            <span className="text-[10px] font-medium tracking-widest uppercase text-[#7dd3fc] mr-2">
+              Community
+            </span>
+            <span className="text-sm text-[#e8f4f0] font-medium">
+              Save The Chase — find out more &#8594;
             </span>
           </a>
         </div>
       </div>
-      <a
-        href="http://savethechase.duckdns.org"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block w-full px-6 py-3 text-center hover:opacity-90 transition-opacity"
-        style={{
-          background: "linear-gradient(120deg, rgba(14,165,233,0.18) 0%, rgba(124,58,237,0.13) 100%)",
-          borderBottom: "1px solid rgba(14,165,233,0.3)",
-        }}
-      >
-        <span className="text-[10px] font-medium tracking-widest uppercase text-[#7dd3fc] mr-2">
-          Community announcement
-        </span>
-        <span className="text-sm text-[#e8f4f0] font-medium">
-          Save The Chase — find out more at savethechase.duckdns.org →
-        </span>
-      </a>
       <div className="py-16 md:py-24 px-6 md:px-12 max-w-[1100px] mx-auto grid md:grid-cols-2 gap-10 md:gap-20 items-center">
         {/* Left Content */}
         <div>
